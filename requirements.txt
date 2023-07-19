@@ -1,0 +1,4 @@
+python-dotenv~=1.0.0
+Pituophis~=1.1
+pyfiglet~=0.7.6
+requests~=2.31.0
