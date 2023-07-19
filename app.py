@@ -44,4 +44,4 @@ def handle(request):
         return [Item(itype="3", text="Page not found")]
 
 
-serve(os.getenv("HOSTNAME"), port=70, handler=handle)
+serve(port=70, handler=handle)
