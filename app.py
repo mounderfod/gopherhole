@@ -33,12 +33,11 @@ def handle(request):
         menu = []
         text = figlet.renderText(request.path[1:]).split("\n")
         menu += [Item(text=i) for i in text]
-        match request.path:
-            case "/news":
-                menu.append(Item(text="=== Provided by The Guardian ==="))
-                menu += news.get_news()
-            case "/weather":
-                menu += weather.get_cities(request.query)
+        if request.path == "/news":
+            menu.append(Item(text="=== Provided by The Guardian ==="))
+            menu += news.get_news()
+        elif request.path == "/weather":
+            menu += weather.get_cities(request.query)
         return menu
     else:
         return [Item(itype="3", text="Page not found")]

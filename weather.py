@@ -10,35 +10,34 @@ load_dotenv()
 
 
 def get_code(code):
-    match code:
-        case 0:
-            return "Clear sky"
-        case 1 | 2 | 3:
-            return "Partly cloudy"
-        case 45 | 48:
-            return "Foggy"
-        case 51 | 53 | 55:
-            return "Drizzle"
-        case 56 | 57:
-            return "Freezing drizzle"
-        case 61 | 63 | 65:
-            return "Rain"
-        case 66 | 67:
-            return "Freezing rain"
-        case 71 | 73 | 675:
-            return "Snow"
-        case 77:
-            return "Snow grains"
-        case 80 | 81 | 82:
-            return "Rain showers"
-        case 85 | 86:
-            return "Snow showers"
-        case 95:
-            return "Thunderstorm"
-        case 96 | 99:
-            return "Thunderstorm with hail"
-        case _:
-            return "Unknown"
+    if code in [0]:
+        return "Clear sky"
+    if code in [1, 2, 3]:
+        return "Partly cloudy"
+    if code in [45, 48]:
+        return "Foggy"
+    if code in [51, 53, 55]:
+        return "Drizzle"
+    if code in [56, 57]:
+        return "Freezing drizzle"
+    if code in [61, 63, 65]:
+        return "Rain"
+    if code in [66, 67]:
+        return "Freezing rain"
+    if code in [71, 73, 675]:
+        return "Snow"
+    if code in [77]:
+        return "Snow grains"
+    if code in [80, 81, 82]:
+        return "Rain showers"
+    if code in [85, 86]:
+        return "Snow showers"
+    if code in [95]:
+        return "Thunderstorm"
+    if code in [96, 99]:
+        return "Thunderstorm with hail"
+
+    return "Unknown"
 
 
 def get_cities(query):
@@ -63,10 +62,10 @@ def get_weather(city):
     place = query.split("&city=")[1]
 
     print(f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&hourly"
-                        f"=temperature_2m,relativehumidity_2m,precipitation_probability,"
-                        f"weathercode,windspeed_10m&daily=weathercode,"
-                        f"temperature_2m_max,temperature_2m_min,sunrise,"
-                        f"sunset&current_weather=true&timezone=auto")
+          f"=temperature_2m,relativehumidity_2m,precipitation_probability,"
+          f"weathercode,windspeed_10m&daily=weathercode,"
+          f"temperature_2m_max,temperature_2m_min,sunrise,"
+          f"sunset&current_weather=true&timezone=auto")
 
     data = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&hourly"
                         f"=temperature_2m,relativehumidity_2m,precipitation_probability,"
@@ -78,9 +77,9 @@ def get_weather(city):
     result += f.renderText("weather").split("\n")
     f.setFont(font="small")
 
-    result.append("="*80)
+    result.append("=" * 80)
     result.append(f"{place}".center(80))
-    result.append("="*80)
+    result.append("=" * 80)
 
     result += f.renderText("hourly").split("\n")
     table_hourly = PrettyTable()
